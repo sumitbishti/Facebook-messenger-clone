@@ -4,11 +4,25 @@ body {
   display: flex;
   justify-content: center;
 }
-.App {
+.sign-in {
+  width: 600px;
+  height: 480px;
+  border: solid gainsboro;
+  border-width: 0px 2px 2px 2px;
+  display: flex;
+  justify-self: center;
+}
+.sign-in-btn {
+  background: white;
+  max-width: 400px;
+  margin: auto;
+  border: solid dodgerblue;
+}
+.chatRoom {
   border: solid gainsboro;
   border-width: 0px 2px;
   width: 600px;
-  height: 425px;
+  height: 410px;
   overflow-y: scroll;
   position: relative;
 }
@@ -16,30 +30,97 @@ body {
   display: flex;
   flex-direction: column;
 }
-.chat-header {
+button {
+  background-color: whitesmoke; /* Green */
+  border: none;
+  color: black;
+  border-radius: 25px;
+  padding: 12px 22px;
+  text-align: center;
+  text-decoration: none;
+  /* display: inline-block; */
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+.App header {
   z-index: 1;
   margin-top: 10px;
   padding: 3px;
-  color: gainsboro;
+  color: whitesmoke;
   border: solid gainsboro;
   border-width: 2px 2px 0px 2px;
   background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 600px;
+  /* box-sizing: border-box; */
 }
-.chat-footer {
+.input-area {
   z-index: 1;
   background-color: #e6e7ec;
   border: solid gainsboro;
   border-width: 0px 2px 2px 2px;
   position: fixed;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   bottom: 0;
   width: 600px;
+}
+p {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: white;
+  text-align: center;
+}
+/* .message {
+  color: black;
+  background-color: #e6e7ec;
+  border-radius: 25px;
+  padding: 10px 20px 3px;
+ // margin: 12px auto;
+  width: fit-content;
+  margin: 12px;
+  display: flex;
+  align-items: center ;
+} */
+.message {
+  display: flex;
+  /* align-items: center; */
+}
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2px 5px;
+}
+.sent {
+  /* background-color: dodgerblue;
+  color: #e6e7ec;
+  margin-left: auto; */
+  flex-direction: row-reverse;
+}
+.sent p {
+  color: white;
+  background: #0b93f6;
+  align-self: flex-end;
+}
+.received p {
+  background: #e5e5ea;
+  color: black;
 }
 .form {
   padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 22px;
+  border: solid gainsboro;
+  /* border-width: 1px 0px; */
 }
 .form-control {
   flex: 1;
@@ -47,19 +128,22 @@ body {
 .icon-button {
   flex: 0;
 }
-.message {
-  color: black;
-  background-color: #e6e7ec;
-  border-radius: 25px;
-  padding: 10px 20px 3px;
-  /* margin: 12px auto; */
-  width: fit-content;
-  margin: 12px;
+form {
+  position: fixed;
+  bottom: 0;
+  background-color: gainsboro;
+  width: 600px;
+  display: flex;
+  font-size: 1.5rem;
 }
-.my-message {
-  background-color: dodgerblue;
-  color: #e6e7ec;
-  margin-left: auto;
+input {
+  line-height: 1.5;  /* width: 100%; */
+  font-size: 1.25rem;
+  background: gainsboro;
+  color: black;
+  outline: none;
+  border: none;
+  padding: 0 10px;
 }
 
 /*
@@ -119,7 +203,7 @@ h2 {
   font-size: 2rem;
 }
 h3 {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
 }
 h4 {
   font-size: 0.875rem;
@@ -152,11 +236,27 @@ p {
   }
 }
 @media screen and (max-width: 620px) {
-  .app {
+  .chatRoom {
     width: 400px;
   }
-  .chat-footer {
+  .input-area {
     width: 400px;
     /* margin-bottom: 2px; */
+  }
+  .App header {
+    width: 400px;
+  }
+  .sign-in{
+    width: 400px;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  button {
+    font-size: 1rem;
+  }
+  form {
+    width: 400px;
+    font-size: 1rem;
   }
 }

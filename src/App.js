@@ -1,70 +1,74 @@
 import React, { useEffect, useState } from 'react'
-import InputArea from './InputArea';
-import Message from './Message';
 import db from './firebase';
 import firebase from 'firebase';
-import FlipMove from 'react-flip-move';
+import 'firebase/auth';
+import ChatRoom from './ChatRoom';
+import SignIn from './SignIn';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+const auth = firebase.auth();
 
 function App() {
-  const [message, setMessage] = useState({ username: '', text: '' });
-  const [messages, setMessages] = useState([]);
+    const [formValue, setFormValue] = useState('');
+    const [messages, setMessages] = useState([]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const [user] = useAuthState(auth);
 
-    db.collection('messages').add({
-      text: message.text,
-      username: message.username,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    })
-    setMessage({ ...message, text: '' })
-  }
-  useEffect(() => {
-    db
-      .collection('messages')
-      .orderBy('timestamp', 'desc')
-      .onSnapshot((snapshot) => {
-        setMessages(snapshot.docs.map(doc => {
-          return {
-            id: doc.id,
-            data: doc.data(),
-          }
-        }))
-      })
-  }, [])
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-  useEffect(() => {
-    const name = prompt('Please enter your username: ')
-    setMessage({ ...message, username: name });
-  }, [])
+        const { uid, photoURL, displayName } = auth.currentUser;
 
-  return (
-    <section >
-      <div className='chat-header'>
-        <h2>Lame-Messenger</h2>
-      </div>
-      <div className='App'>
-        <div className='chat-footer'>
-          <InputArea handleSubmit={handleSubmit} message={message} setMessage={setMessage} />
-        </div>
+        db.collection('messages').add({
+            text: formValue,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            uid,
+            photoURL,
+            username: displayName,
+        })
+        setFormValue('');
+    }
 
-        <div className='chat-messages'>
-          <FlipMove>
-            {messages.map(({ id, data }) => {
-              // const { id, data } = msgObj;
-              return (
-                <Message
-                  key={id}
-                  message={data}
-                  myUsername={message.username}
-                />
-              )
-            })}
-          </FlipMove>
-        </div>
-      </div>
-    </section>
-  )
+    useEffect(() => {
+        db
+            .collection('messages')
+            .orderBy('timestamp', 'desc')
+            .onSnapshot((snapshot) => {
+                setMessages(snapshot.docs.map(doc => {
+                    return {
+                        id: doc.id,
+                        data: doc.data(),
+                    }
+                }))
+            })
+    }, [])
+
+    return (
+        <section className='App'>
+
+            <header >
+                <h3>Messenger <span>💬</span></h3>
+                <SignOut />
+            </header>
+
+            <section >
+                {user ? <ChatRoom
+                    handleSubmit={handleSubmit}
+                    formValue={formValue}
+                    setFormValue={setFormValue}
+                    messages={messages}
+                    auth={auth}
+                /> : <SignIn auth={auth} />}
+            </section>
+
+        </section>
+    )
+}
+
+function SignOut() {
+    return auth.currentUser && (
+        <button onClick={() => auth.signOut()}>Sign Out</button>
+    )
 }
 
 export default App

@@ -1,24 +1,39 @@
 import React from 'react'
-import { Button, Input, InputLabel } from '@material-ui/core'
+import { Input, InputLabel } from '@material-ui/core'
 import { FormControl, IconButton } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send'
 
-const InputArea = ({ handleSubmit, setMessage, message }) => {
+const InputArea = ({ handleSubmit, setFormValue, formValue }) => {
     return (
         <div>
             <form onSubmit={handleSubmit} className='form'>
-                <FormControl className='form-control'>
+
+                <input
+                    className='form-control'    
+                    value={formValue}
+                    autoFocus={true}
+                    onChange={(e) => setFormValue(e.target.value)}
+                ></input>
+                {/* <FormControl className='form-control'>
                     <InputLabel >Say hello...</InputLabel>
                     <Input
-                        value={message.text}
+                        value={formValue}
                         autoFocus={true}
-                        onChange={(e) => setMessage({ ...message, text: e.target.value })}
+                        onChange={(e) => setFormValue(e.target.value)}
                     />
-                </FormControl>
-                <IconButton className='icon-button' disabled={!message.text} type='submit' color='primary'>
-                    <SendIcon/>
+                </FormControl> */}
+
+                <IconButton
+                    className='icon-button'
+                    disabled={!formValue}
+                    type='submit'
+                    color='primary'
+                >
+                    <SendIcon />
                 </IconButton>
+
             </form>
+
         </div>
     )
 }

@@ -1,13 +1,14 @@
 import React, { forwardRef } from 'react'
 
-const Message = forwardRef(({ message, myUsername }, ref) => {
-    const { text, username } = message;
-    const isUser = myUsername === username ? true : false;
+const Message = forwardRef(({ message, auth }, ref) => {
+    const { text, username, photoURL, uid } = message;
+
+    const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
+
     return (
-        <div ref={ref}>
-            <div className={`message ${isUser && 'my-message'}`}>
-                <h4>{!isUser && `${username || 'Unknown user'}:`} {text}</h4>
-            </div>
+        <div ref={ref} className={`message ${messageClass}`}>
+            <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+            <p>{text}</p>
         </div>
     )
 })

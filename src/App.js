@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import db from './firebase';
 import firebase from 'firebase';
 import 'firebase/auth';
@@ -11,23 +11,22 @@ const auth = firebase.auth();
 function App() {
     const [formValue, setFormValue] = useState('');
     const [messages, setMessages] = useState([]);
-
     const [user] = useAuthState(auth);
+    // const dummy = useRef();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const { uid, photoURL, displayName } = auth.currentUser;
-
-        db.collection('messages').add({
-            text: formValue,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            uid,
-            photoURL,
-            username: displayName,
-        })
-        setFormValue('');
-    }
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     const { uid, photoURL, displayName } = auth.currentUser;
+    //     db.collection('messages').add({
+    //         text: formValue,
+    //         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //         uid,
+    //         photoURL,
+    //         username: displayName,
+    //     })
+    //     setFormValue('');
+    //     dummy.current.scrollIntoView({ behavior: 'smooth' });
+    // }
 
     useEffect(() => {
         db
@@ -44,31 +43,26 @@ function App() {
     }, [])
 
     return (
-        <section className='App'>
-
+        <div className='App'>
             <header >
                 <h3>Messenger <span>💬</span></h3>
                 <SignOut />
             </header>
-
-            <section >
+            <div>
                 {user ? <ChatRoom
-                    handleSubmit={handleSubmit}
                     formValue={formValue}
                     setFormValue={setFormValue}
                     messages={messages}
                     auth={auth}
                 /> : <SignIn auth={auth} />}
-            </section>
-
-        </section>
+            </div>
+        </div>
     )
 }
 
 function SignOut() {
     return auth.currentUser && (
-        <button onClick={() => auth.signOut()}>Sign Out</button>
+        <button className='sign-out' onClick={() => auth.signOut()}>Sign Out</button>
     )
 }
-
 export default App

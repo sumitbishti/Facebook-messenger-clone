@@ -6,8 +6,8 @@ const Message = forwardRef(({ message, auth }, ref) => {
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
 
     return (
-        <div ref={ref} className={`message ${messageClass}`}>
-            <img src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'} />
+        <div className={`message ${messageClass}`}>
+            <img src={photoURL} />
             <p>{text}</p>
         </div>
     )

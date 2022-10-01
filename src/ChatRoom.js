@@ -1,33 +1,43 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import InputArea from './InputArea';
 import Message from './Message';
-import FlipMove from 'react-flip-move';
+import db from './firebase';
+import firebase from 'firebase';
 
-const ChatRoom = ({ handleSubmit, formValue, setFormValue, messages, auth }) => {
+const ChatRoom = ({ formValue, setFormValue, messages, auth }) => {
+    const dummy = useRef();
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { uid, photoURL, displayName } = auth.currentUser;
+        db.collection('messages').add({
+            text: formValue,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            uid,
+            photoURL,
+            username: displayName,
+        })
+        setFormValue('');   
+        // if(!dummy.current) return;
+        // dummy.current.scrollIntoView(false);
+        // window.scrollTo(0, 30);
+    }
     return (
-        <div className='chatRoom'>
-
-            <div className='input-area'>
+        <main>
+            {messages && messages.map(({ id, data }) => {
+                return (
+                    <Message
+                        key={id}
+                        message={data}
+                        auth={auth}
+                    />
+                )
+            })}
+            <span ref={dummy}></span>
+            <div>
                 <InputArea handleSubmit={handleSubmit} formValue={formValue} setFormValue={setFormValue} />
             </div>
-
-            <div className='chat-messages'>
-                <FlipMove>
-                    {messages.map(({ id, data }) => {
-                        // const { id, data } = msgObj;
-                        return (
-                            <Message
-                                key={id}
-                                message={data}
-                                auth={auth}
-                            />
-                        )
-                    })}
-                </FlipMove>
-            </div>
-
-        </div>
+        </main>
     )
 }
 

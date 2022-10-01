@@ -1,72 +1,104 @@
 body {
+  background-color: #282c34;
+}
+.App {
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  display: flex;
-  justify-content: center;
-}
-.sign-in {
-  width: 600px;
-  height: 480px;
-  border: solid gainsboro;
-  border-width: 0px 2px 2px 2px;
-  display: flex;
-  justify-self: center;
-}
-.sign-in-btn {
-  background: white;
-  max-width: 400px;
-  margin: auto;
-  border: solid dodgerblue;
-}
-.chatRoom {
-  border: solid gainsboro;
-  border-width: 0px 2px;
-  width: 600px;
-  height: 410px;
-  overflow-y: scroll;
-  position: relative;
-}
-.chat-messages {
-  display: flex;
-  flex-direction: column;
-}
-button {
-  background-color: whitesmoke; /* Green */
-  border: none;
-  color: black;
-  border-radius: 25px;
-  padding: 12px 22px;
-  text-align: center;
-  text-decoration: none;
-  /* display: inline-block; */
-  cursor: pointer;
-  font-size: 1.25rem;
+  max-width: 728px;
+  margin: 0 auto;
 }
 .App header {
-  z-index: 1;
-  margin-top: 10px;
-  padding: 3px;
-  color: whitesmoke;
-  border: solid gainsboro;
-  border-width: 2px 2px 0px 2px;
-  background-color: dodgerblue;
+  background-color: #181717;
+  height: 10vh;
+  min-height: 50px;
+  color: white;
+  position: fixed;
+  width: 100%;
+  max-width: 728px;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 99;
   padding: 10px;
-  width: 600px;
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
 }
-.input-area {
-  z-index: 1;
-  background-color: #e6e7ec;
-  border: solid gainsboro;
-  border-width: 0px 2px 2px 2px;
+.App section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: rgb(40, 37, 53);
+}
+main {
+  padding: 10px;
+  height: 80vh;
+  margin: 10vh 0 14vh 0 ;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+main::-webkit-scrollbar {
+  width: 0.25rem;
+}
+main::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+main::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}
+form {
+  height: 10vh;
   position: fixed;
-  margin-bottom: 20px;
   bottom: 0;
-  width: 600px;
+  background-color: rgb(24, 23, 23);
+  width: 100%;
+  max-width: 728px;
+  display: flex;
+  font-size: 1.5rem;
 }
+form button {
+  width: 20%;
+  background-color: rgb(56, 56, 143);
+}
+input {
+  line-height: 1.5;
+  width: 100%;
+  font-size: 1.5rem;
+  background: rgb(58, 58, 58);
+  color: white;
+  outline: none;
+  border: none;
+  padding: 0 10px;
+}
+
+button {
+  background-color: #282c34; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.sign-in {
+  color: #282c34;
+  background: white;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+ul, li {
+  text-align: left;
+  list-style: none;
+}
+
 p {
   max-width: 500px;
   margin-bottom: 12px;
@@ -77,31 +109,11 @@ p {
   color: white;
   text-align: center;
 }
-/* .message {
-  color: black;
-  background-color: #e6e7ec;
-  border-radius: 25px;
-  padding: 10px 20px 3px;
- // margin: 12px auto;
-  width: fit-content;
-  margin: 12px;
-  display: flex;
-  align-items: center ;
-} */
 .message {
   display: flex;
-  /* align-items: center; */
-}
-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin: 2px 5px;
+  align-items: center;
 }
 .sent {
-  /* background-color: dodgerblue;
-  color: #e6e7ec;
-  margin-left: auto; */
   flex-direction: row-reverse;
 }
 .sent p {
@@ -113,150 +125,9 @@ img {
   background: #e5e5ea;
   color: black;
 }
-.form {
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 22px;
-  border: solid gainsboro;
-  /* border-width: 1px 0px; */
-}
-.form-control {
-  flex: 1;
-}
-.icon-button {
-  flex: 0;
-}
-form {
-  position: fixed;
-  bottom: 0;
-  background-color: gainsboro;
-  width: 600px;
-  display: flex;
-  font-size: 1.5rem;
-}
-input {
-  line-height: 1.5;  /* width: 100%; */
-  font-size: 1.25rem;
-  background: gainsboro;
-  color: black;
-  outline: none;
-  border: none;
-  padding: 0 10px;
-}
-
-/*
-=============== 
-Variables
-===============
-*/
-
-:root {
-  /* darkest grey - used for headings */
-  --clr-grey-1: hsl(209, 61%, 16%);
-  /* grey used for paragraphs */
-  --clr-grey-5: hsl(210, 22%, 49%);
-  --clr-grey-10: hsl(210, 36%, 96%);
-  --spacing: 0.1rem;
-}
-/*
-=============== 
-Global Styles
-===============
-*/
-
-*,
-::after,
-::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: var(--clr-grey-10);
-  color: var(--clr-grey-1);
-  line-height: 1.5;
-  font-size: 0.875rem;
-}
-ul {
-  list-style-type: none;
-}
-a {
-  text-decoration: none;
-}
-h1,
-h2,
-h3,
-h4 {
-  letter-spacing: var(--spacing);
-  text-transform: capitalize;
-  line-height: 1.25;
-  margin-bottom: 0.75rem;
-}
-h1 {
-  font-size: 3rem;
-}
-h2 {
-  font-size: 2rem;
-}
-h3 {
-  font-size: 1.75rem;
-}
-h4 {
-  font-size: 0.875rem;
-}
-p {
-  margin-bottom: 1.25rem;
-  color: var(--clr-grey-5);
-}
-@media screen and (min-width: 800px) {
-  h1 {
-    font-size: 4rem;
-  }
-  h2 {
-    font-size: 2.5rem;
-  }
-  h3 {
-    font-size: 1.75rem;
-  }
-  h4 {
-    font-size: 1rem;
-  }
-  body {
-    font-size: 1rem;
-  }
-  h1,
-  h2,
-  h3,
-  h4 {
-    line-height: 1;
-  }
-}
-@media screen and (max-width: 620px) {
-  .chatRoom {
-    width: 400px;
-  }
-  .input-area {
-    width: 400px;
-    /* margin-bottom: 2px; */
-  }
-  .App header {
-    width: 400px;
-  }
-  .sign-in{
-    width: 400px;
-  }
-  h3 {
-    font-size: 1.5rem;
-  }
-  button {
-    font-size: 1rem;
-  }
-  form {
-    width: 400px;
-    font-size: 1rem;
-  }
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2px 5px;
 }
